@@ -1,0 +1,94 @@
+USER:
+Erstelle eine Python-Webanwendung. Ich möchte CSV- oder Excel-Dateien hochladen, eine Analyse sehen und die bereinigten Daten wieder herunterladen können.
+
+AGENT:
+UpdateTodos: 3 items
+Ich lege jetzt die Dateien für die Streamlit-Webanwendung (`app.py` und `requirements.txt`) in deinem Projektordner an.
+
+
+**Diff:**
+```diff
+
+```
+
+
+
+
+
+**Diff:**
+```diff
+
+```
+
+
+
+Ich habe dir eine lauffähige kleine Webanwendung mit Streamlit erstellt.
+
+Sie kann:
+- CSV- und Excel-Dateien hochladen  
+- einen Überblick + Statistiken + fehlende Werte anzeigen  
+- einige Bereinigungsschritte anwenden  
+- die bereinigten Daten als CSV herunterladen  
+
+### 1. Struktur
+
+In deinem Projektordner liegen jetzt:
+
+- `app.py` – der Quellcode der Webanwendung
+- `requirements.txt` – die benötigten Python-Pakete
+
+Die App macht u.a.:
+
+- Upload (`st.file_uploader`) für `csv`, `xls`, `xlsx`
+- Einlesen mit `pandas.read_csv` (Trennzeichen automatisch erkennen) oder `pandas.read_excel`
+- Anzeige:
+  - Dateiname, Form (Zeilen/Spalten)
+  - Vorschau (erste 100 Zeilen)
+  - `describe(include="all")` als Statistik
+  - Tabelle mit Anzahl und Prozentanteil fehlender Werte je Spalte
+- Bereinigung (über Sidebar-Checkboxen):
+  - Doppelte Zeilen entfernen
+  - Vollständig leere Zeilen entfernen
+  - Whitespace am Anfang/Ende in Textspalten entfernen
+  - Fehlende Werte in numerischen Spalten mit Mittelwert füllen
+  - Fehlende Werte in Textspalten mit Modus (häufigstem Wert) füllen
+- Download:
+  - Bereinigte Daten als `bereinigte_daten.csv` per `st.download_button`
+
+---
+
+### 2. Installation der Abhängigkeiten
+
+Führe im Projektordner im Terminal (PowerShell) aus:
+
+```pwsh
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+---
+
+### 3. Anwendung starten
+
+Im (aktivierten) virtuellen Environment:
+
+```pwsh
+streamlit run app.py
+```
+Dann öffnet sich automatisch ein Browserfenster (oder es wird dir die URL angezeigt, meist `http://localhost:8501`).
+
+---
+
+### 4. Nutzung
+
+1. Links im Sidebar eine CSV- oder Excel-Datei auswählen.  
+2. Im Hauptbereich siehst du:
+   - Vorschau der Rohdaten
+   - Statistiken und fehlende Werte
+3. Links im Sidebar die gewünschten Bereinigungsschritte per Checkbox setzen.  
+4. Im unteren Bereich „Bereinigte Daten herunterladen“ anklicken, um die bereinigte CSV zu speichern.
+
+---
+
+Wenn du bestimmte zusätzliche Bereinigungsschritte brauchst (z.B. Spalten umbenennen, bestimmte Spalten löschen, Datumsformate vereinheitlichen), sag mir einfach genau, was du möchtest, dann erweitere ich die App entsprechend.
+
